@@ -1,0 +1,24 @@
+{
+  "name": "rubberglove",
+  "version": "0.2.0",
+  "description": "A library to control Windows Firewall, Registry, Task Scheduler for people with Microsoftophobia or other type of allergies",
+  "main": "lib/rubberglove.js",
+  "scripts": {
+    "test": "`npm bin`/mocha --timeout=10000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/telamon/rubberglove.git"
+  },
+  "author": "Tony Ivanov",
+  "license": "GPLv2",
+  "bugs": {
+    "url": "https://github.com/telamon/rubberglove/issues"
+  },
+  "homepage": "https://github.com/telamon/rubberglove#readme",
+  "dependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "node-powershell": "^3.0.1"
+  }
+}
