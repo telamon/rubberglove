@@ -4,7 +4,7 @@
 module.exports= {
 	category: 'performance|integrity',
 	compat: 'W10+',
-	description: 'Tries to completely disable telemetry collection.',
+	description: 'Tries to completely disable MicrosoftKeylogger(TM).',
 	up: ()=>{
 		return rubberglove.registry
 		.set('HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection','AllowTelemetry',0)
