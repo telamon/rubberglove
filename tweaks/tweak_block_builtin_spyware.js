@@ -1,9 +1,5 @@
 const path = require('path');
 
-//const rubberglove= require('rubberglove');
-const rubberglove=require(path.join(__dirname,'..','lib','rubberglove'));
-
-
 const maliciousSoftware=[
 	'c:\windows\system32\speech_onecore\common\speechmodeldownload.exe', // Windows Speech Download Executable
 	'c:\windows\system32\werfault.exe', // Windows Problem Reporting
@@ -15,9 +11,9 @@ module.exports= {
 	category: 'integrity',
 	compat: 'W10+',
 	description: 'Prevent Microsoft from spying on you',
-	up: ()=>{
+	up: function(){
 		let promises= maliciousSoftware.map((program)=>{
-			return rubberglove.firewall.addRule({
+			return this.glove.firewall.addRule({
 				id: `PREVENT_MSSPYWARE_${path.basename(program)}`,
 				name: 'Prevent Microsoft Spyware',
 				match: {
@@ -27,9 +23,9 @@ module.exports= {
 		});
 		return Promise.all(promises);
 	},
-	down: ()=>{
+	down: function(){
 		Promise.all(maliciousSoftware.map((program)=>{
-			return rubberglove.firewall.removeDirectionalRule(`PREVENT_MSSPYWARE_${path.basename(program)}`);
+			return this.glove.firewall.removeDirectionalRule(`PREVENT_MSSPYWARE_${path.basename(program)}`);
 		}));
 	}
 }
