@@ -1,0 +1,32 @@
+#!/usr/bin/env node
+
+const program = require('commander'),
+	chalk = require('chalk'),
+	path = require('path'),
+	tweaks = require(path.join(__dirname,'..','lib','tweaks'));
+
+program
+  .option('-a, --all', 'Show all including tweaks incompatible to current system')
+  .parse(process.argv);
+
+
+try{
+	console.log("Name\t\t\tCategory\tDescription");
+	let list= tweaks
+	.list()
+	.filter((tweak)=>{
+		if(program.all) return true;
+		return !tweak.incompatible;
+	})
+	.forEach((tweak)=>{
+		let pad = Array(5-Math.ceil(tweak.name.length/8)).join("\t");
+
+		let name = tweak.irreversible ? chalk.red(tweak.name) : chalk.blue(tweak.name);
+		if(tweak.incompatile) name = chalk.gray(tweak.name);
+
+		console.log(`${name}${pad}${chalk.gray(tweak.category)}\t${tweak.description}`);
+	});
+}catch(e){
+  console.error(e);
+  process.exit(1);
+}
