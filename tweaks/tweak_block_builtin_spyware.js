@@ -29,7 +29,7 @@ module.exports= {
 	},
 	down: ()=>{
 		Promise.all(maliciousSoftware.map((program)=>{
-			return rubberglove.firewall.removeRule(`PREVENT_MSSPYWARE_${path.basename(program)}`);
+			return rubberglove.firewall.removeDirectionalRule(`PREVENT_MSSPYWARE_${path.basename(program)}`);
 		}));
 	}
 }

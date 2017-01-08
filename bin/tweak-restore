@@ -8,4 +8,4 @@ program
 	.option('-p --pretend',"Print the actions but don't actually change anything")
 	.parse(process.argv);
 
-require('./tweak-change.js').change('up',program);
+require('./tweak-change.js').change('down',program);
