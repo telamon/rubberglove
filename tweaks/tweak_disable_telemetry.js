@@ -7,14 +7,13 @@ module.exports= {
 	compat: 'W10+',
 	description: 'Tries to completely disable MicrosoftKeylogger(TM).',
 	up: function(){
-		console.log(this);
 		return this.glove.registry
-		.set('HKLM:/SOFTWARE/Policies/Microsoft/Windows/DataCollection','AllowTelemetry',0)
-		.then(()=>rubberglove.services.disable('dmwappushsvc'));
+		.set('HKLM:/SOFTWARE/Policies/Microsoft/Windows/DataCollection/AllowTelemetry',0)
+		.then(()=>this.rubberglove.services.disable('dmwappushsvc'));
 	},
 	down: function(){
 		return this.glove.registry
-		.unset('HKLM:/SOFTWARE/Policies/Microsoft/Windows/DataCollection','AllowTelemetry')
-		.then(()=>rubberglove.services.setStartup('dmwappushsvc','automatic'));
+		.unset('HKLM:/SOFTWARE/Policies/Microsoft/Windows/DataCollection/AllowTelemetry')
+		.then(()=>this.rubberglove.services.setStartup('dmwappushsvc','automatic'));
 	}
 }
