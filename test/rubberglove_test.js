@@ -43,7 +43,7 @@ describe('A rubber-glove to protect me from Microsoft.',function(){
 			})
 			.catch(done)
 		});
-		it.only('should set keys',function(done){
+		it('should set keys',function(done){
 			rubberGlove.registry
 			.set(path.join(DUMMYPATH,'TestIntegerKey'),0)
 			.then(()=>{
@@ -65,8 +65,33 @@ describe('A rubber-glove to protect me from Microsoft.',function(){
 		it('should list installed malware')
 		it('should uninstall applications');
 	});
-	describe('Services:',function(){
-		it('should disable services');
-		it('should enable services');
+	describe.only('Services:',function(){
+		it('should list all known service',function(done){
+			rubberGlove.services
+			.list()
+			.then(function(services){
+				expect(services.length).to.be.above(0);
+				let aService=services[0];
+				expect(aService).to.have.property('status');
+				expect(aService).to.have.property('startType');
+				expect(aService).to.have.property('name');
+				expect(aService).to.have.property('id');
+				expect(aService).to.have.property('dependsOn');
+				expect(aService).to.have.property('dependencyOf');
+				services.forEach((service)=>{
+					console.log(`${service.status}\t${service.startType}\t${service.id}\t${service.name}`);
+				})
+				done();
+			})
+			.catch(done);
+		})
+		it('should get info about particular service')
+		it.skip('should disable a service',function(done){
+
+		});
+		it('should enable a service');
+		it('should stop a service');
+		it('should start a service');
+		it('should restart a service');
 	})
 })
