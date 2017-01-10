@@ -68,7 +68,7 @@ describe('A rubber-glove to protect me from Microsoft.',function(){
 	describe.only('Services:',function(){
 		it('should list all known service',function(done){
 			rubberGlove.services
-			.list()
+			.list({withRelated:true})
 			.then(function(services){
 				expect(services.length).to.be.above(0);
 				let aService=services[0];
@@ -79,16 +79,14 @@ describe('A rubber-glove to protect me from Microsoft.',function(){
 				expect(aService).to.have.property('dependsOn');
 				expect(aService).to.have.property('dependencyOf');
 				services.forEach((service)=>{
-					console.log(`${service.status}\t${service.startType}\t${service.id}\t${service.name}`);
+					//console.log(`${service.status}\t${service.startType}\t${service.id}\t${service.name}`);
+					console.log(service)
 				})
 				done();
 			})
 			.catch(done);
 		})
-		it('should get info about particular service')
-		it.skip('should disable a service',function(done){
-
-		});
+		it('should disable a service');
 		it('should enable a service');
 		it('should stop a service');
 		it('should start a service');
