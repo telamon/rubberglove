@@ -40,6 +40,7 @@ describe('A rubber-glove to protect me from Microsoft.',function(){
 			.then((value)=>{
 				expect(value).to.be.a('string');
 				expect(value).to.equal('C:\\Program Files');
+				done();
 			})
 			.catch(done)
 		});
@@ -65,7 +66,7 @@ describe('A rubber-glove to protect me from Microsoft.',function(){
 		it('should list installed malware')
 		it('should uninstall applications');
 	});
-	describe.only('Services:',function(){
+	describe('Services:',function(){
 		it('should list all known service',function(done){
 			rubberGlove.services
 			.list({withRelated:true})
@@ -86,8 +87,23 @@ describe('A rubber-glove to protect me from Microsoft.',function(){
 			})
 			.catch(done);
 		})
-		it('should disable a service');
-		it('should enable a service');
+		it('should disable a service',function(done){
+			rubberGlove.services.disable('XblGameSave')
+			.then((service)=>{
+				expect(service).to.have.property('startType','disabled');
+				expect(service).to.have.property('status','stopped');
+				done()
+			})
+			.catch(done);
+		});
+		it('should enable a service',function(done){
+			rubberGlove.services.enable('XblGameSave','manual')
+			.then((service)=>{
+				expect(service).to.have.property('startType','manual');
+				done()
+			})
+			.catch(done);
+		});
 		it('should stop a service');
 		it('should start a service');
 		it('should restart a service');
