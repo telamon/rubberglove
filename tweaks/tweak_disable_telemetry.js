@@ -9,11 +9,11 @@ module.exports= {
 	up: function(){
 		return this.glove.registry
 		.set('HKLM:/SOFTWARE/Policies/Microsoft/Windows/DataCollection/AllowTelemetry',0)
-		.then(()=>this.rubberglove.services.disable('dmwappushsvc'));
+		.then(()=>this.glove.services.disable('dmwappushservice'));
 	},
 	down: function(){
 		return this.glove.registry
 		.unset('HKLM:/SOFTWARE/Policies/Microsoft/Windows/DataCollection/AllowTelemetry')
-		.then(()=>this.rubberglove.services.setStartup('dmwappushsvc','automatic'));
+		.then(()=>this.glove.services.setStartup('dmwappushservice','automatic'));
 	}
 }
