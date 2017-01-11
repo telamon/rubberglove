@@ -107,5 +107,12 @@ describe('A rubber-glove to protect me from Microsoft.',function(){
 		it('should stop a service');
 		it('should start a service');
 		it('should restart a service');
+	});
+	describe.only('Windows filesystem utils.',function(done){
+		it('should grant access for admin to locked folders',function(done){
+			rubberGlove.fs.takeOwnership('.')
+			.then(()=>done())
+			.catch(done);
+		})
 	})
 })
