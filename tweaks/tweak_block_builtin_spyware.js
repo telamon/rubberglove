@@ -1,10 +1,12 @@
 const path = require('path');
 
 const maliciousSoftware=[
-	'c:\windows\system32\speech_onecore\common\speechmodeldownload.exe', // Windows Speech Download Executable
-	'c:\windows\system32\werfault.exe', // Windows Problem Reporting
-	'c:\windows\system32\wermgr.exe', // Windows Problem Reporting
-	'c:\windows\system32\compattelrunner.exe', // Windows Compatiblity Telemetry
+	'c:/windows/system32/speech_onecore/common/speechmodeldownload.exe', // Windows Speech Download Executable
+	'c:/windows/system32/werfault.exe', // Windows Problem Reporting
+	'c:/windows/system32/wermgr.exe', // Windows Problem Reporting
+	'c:/windows/system32/compattelrunner.exe', // Windows Compatiblity Telemetry
+	'c:/windows/system32/smartscreen.exe', // Windows Smartscreen, TODO: move this rule to specific disable smartscreen tweak.
+	'c:/windows/system32/slui.exe'
 ];
 
 module.exports= {
