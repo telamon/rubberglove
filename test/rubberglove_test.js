@@ -63,7 +63,18 @@ describe('A rubber-glove to protect me from Microsoft.',function(){
 	it('should inactivate scheduled tasks');
 
 	describe('The windows-store:',function(){
-		it('should list installed malware')
+		it.only('should list installed malware',function(done){
+			rubberGlove.app.list()
+			.then((apps)=>{
+				expect(apps.length).to.be.above(0);
+				let app = apps[0];
+				expect(app).to.have.property('name');
+				expect(app).to.have.property('id',app.name);
+				expect(app).to.have.property('installLocation')
+				done();	
+			})
+			.catch(done);
+		})
 		it('should uninstall applications');
 	});
 	describe('Services:',function(){
